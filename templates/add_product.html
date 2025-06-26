@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить товар</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .add-product-form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .add-product-form input,
+        .add-product-form textarea,
+        .add-product-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .add-product-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        .add-product-form button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .add-product-form button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Строй.IT</div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="{{ url_for('home') }}" class="nav-button">Главная</a></li>
+                    <li><a href="{{ url_for('products') }}" class="nav-button">Товары</a></li>
+                    <li><a href="{{ url_for('add_product') }}" class="nav-button active">Добавить товар</a></li>
+                    <li><a href="{{ url_for('profile') }}" class="nav-button">Кабинет</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="add-product-form">
+            <h1>Добавить новый товар</h1>
+            <form method="POST" enctype="multipart/form-data">
+                <div>
+                    <label>Название товара:</label>
+                    <input type="text" name="name" required>
+                </div>
+
+                <div>
+                    <label>Описание:</label>
+                    <textarea name="description" required></textarea>
+                </div>
+
+                <div>
+                    <label>Цена (руб.):</label>
+                    <input type="number" name="price" step="0.01" min="0" required>
+                </div>
+
+                <div>
+                    <label>Изображение товара:</label>
+                    <input type="file" name="image" accept="image/*" required>
+                    <small>Допустимые форматы: JPG, PNG</small>
+                </div>
+
+                <button type="submit">Добавить товар</button>
+            </form>
+
+            <div style="margin-top: 20px;">
+                <a href="{{ url_for('products') }}" class="button">Назад к каталогу</a>
+            </div>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 20px; background: #405d77; margin-top: 30px; border-top: 1px solid #e0e0e0;">
+        <p style="margin: 0; color: #000000; font-style: italic; font-weight: bold;">&copy; 2025 Строй.IT. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

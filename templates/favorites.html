@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Избранное</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/products_style.css') }}">
+    <style>
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .product-icon {
+            position: relative;
+            margin-bottom: 10px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .favorite-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: gold;
+            font-size: 24px;
+            text-decoration: none;
+            background: rgba(0,0,0,0.5);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-info {
+            padding: 10px 0;
+        }
+
+        .product-info h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+
+        .price {
+            font-weight: bold;
+            font-size: 18px;
+            color: #007bff;
+            margin: 10px 0;
+        }
+
+        .buy-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .buy-button:hover {
+            background-color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Строй.IT</div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="{{ url_for('home') }}" class="nav-button">Главная</a></li>
+                    <li><a href="{{ url_for('about') }}" class="nav-button">О нас</a></li>
+                    <li><a href="{{ url_for('products') }}" class="nav-button">Товары</a></li>
+                    <li><a href="{{ url_for('view_cart') }}" class="nav-button">Корзина</a></li>
+                    <li><a href="{{ url_for('favorites') }}" class="nav-button active">Избранное</a></li>
+                    <li><a href="{{ url_for('contact') }}" class="nav-button">Контакты</a></li>
+                    <li><a href="{{ url_for('profile') }}" class="nav-button">Кабинет</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1 style="text-align: center; margin: 20px 0; color: #405d77;">Избранные товары</h1>
+
+        {% if not favorites %}
+            <p style="text-align: center; font-size: 18px; color: #666;">У вас пока нет избранных товаров</p>
+        {% else %}
+            <div class="product-list">
+                {% for product in favorites %}
+                    <div class="product-item">
+                        <div class="product-icon">
+                            <img src="{{ url_for('static', filename='images/' ~ product.image) }}"
+                                 alt="{{ product.name }}"
+                                 onclick="window.location='{{ url_for('product_detail', product_id=product.id) }}'">
+                            <a href="{{ url_for('remove_favorite', product_id=product.id) }}"
+                               class="favorite-button" title="Удалить из избранного">★</a>
+                        </div>
+                        <div class="product-info">
+                            <h3><a href="{{ url_for('product_detail', product_id=product.id) }}" style="color: #333; text-decoration: none;">{{ product.name }}</a></h3>
+                            <p class="price">{{ product.price }} руб.</p>
+                            <a href="{{ url_for('add_to_cart', product_id=product.id) }}"
+                               class="buy-button">В корзину</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </main>
+
+    <footer style="text-align: center; padding: 20px; background: #405d77; margin-top: 30px; border-top: 1px solid #e0e0e0;">
+        <p style="margin: 0; color: #000000; font-style: italic; font-weight: bold;">&copy; 2025 Строй.IT. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

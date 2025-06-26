@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас - Строй.IT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #FFFFE0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header-container {
+            background-color: #cccccc;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            color: #405d77;
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .about-header h1 {
+            font-size: 32px;
+            color: #405d77;
+            margin-bottom: 15px;
+        }
+
+        .about-header p {
+            font-size: 18px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .about-section {
+            margin-bottom: 25px;
+        }
+
+        .about-section h2 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .about-section p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .features-list {
+            list-style-type: none;
+            margin: 20px 0;
+        }
+
+        .features-list li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #7CFC00;
+        }
+
+        footer {
+            background-color: #f5f5f5;
+            color: #666;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 28px;
+            }
+
+            .about-header h1 {
+                font-size: 26px;
+            }
+
+            .about-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header-container">
+        <div class="logo">Строй.IT</div>
+    </header>
+
+    <main class="about-container">
+        <div class="about-header">
+            <h1>О строительном магазине 'Строй.IT'</h1>
+            <p>Ваш надежный партнер в мире строительных материалов и инструментов</p>
+        </div>
+
+        <div class="about-content">
+            <div class="about-section">
+                <p>Благодарим за ваш интерес! Добро пожаловать в наш магазин. Мы предоставляем своим клиентам широкий ассортимент качественных инструментов и материалов для реализации любых строительных проектов.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>Наша миссия</h2>
+                <p>Наша цель – помочь вам реализовать ваши строительные проекты быстро и качественно. Мы предлагаем товары от лучших производителей по конкурентоспособным ценам, с гарантией качества и оперативной доставкой.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>Что мы предлагаем</h2>
+                <ul class="features-list">
+                    <li>Широкий выбор строительных материалов и отделки</li>
+                    <li>Профессиональные инструменты и оборудование</li>
+                    <li>Квалифицированные консультации специалистов</li>
+                    <li>Гибкую систему скидок для постоянных клиентов</li>
+                    <li>Быструю доставку и удобный самовывоз</li>
+                </ul>
+            </div>
+
+            <div class="about-section">
+                <h2>Почему выбирают нас</h2>
+                <p>Более 10 лет успешной работы на рынке строительных материалов. Мы дорожим своей репутацией и гарантируем качество всей предлагаемой продукции.</p>
+            </div>
+
+            <center>
+                <a href="{{ url_for('home') }}" class="back-button">На главную</a>
+            </center>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 20px; background: #405d77; margin-top: 30px; border-top: 1px solid #e0e0e0;">
+        <p style="margin: 0; color: #000000; font-style: italic; font-weight: bold;">&copy; 2025 Строй.IT. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

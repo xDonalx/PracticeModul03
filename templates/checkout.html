@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Завершение покупки</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/products_style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Строй.IT</div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="{{ url_for('home') }}" class="nav-button">Главная</a></li>
+                    <li><a href="{{ url_for('about') }}" class="nav-button">О нас</a></li>
+                    <li><a href="{{ url_for('add_product') }}" class="nav-button">Добавить продукт</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Спасибо за покупку!</h1>
+        <p>Ваш товар успешно куплен.</p>
+        <a href="{{ url_for('products') }}" class="continue-shopping-button">Вернуться к покупкам</a>
+    </main>
+
+    <footer style="text-align: center; padding: 20px; background: #405d77; margin-top: 30px; border-top: 1px solid #e0e0e0;">
+        <p style="margin: 0; color: #000000; font-style: italic; font-weight: bold;">&copy; 2025 Строй.IT. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

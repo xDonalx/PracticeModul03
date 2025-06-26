@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/product_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart_style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Строй.IT</div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="{{ url_for('home') }}" class="nav-button">Главная</a></li>
+                    <li><a href="{{ url_for('about') }}" class="nav-button">О нас</a></li>
+                    <li><a href="{{ url_for('add_product') }}" class="nav-button">Добавить продукт</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Корзина</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Наименование</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Итого</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }} руб.</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price * item.quantity }} руб.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <h2 style="text-align: center;">Общая сумма: {{ total_amount }} руб.</h2>
+
+        <div class="button-container">
+            <a href="{{ url_for('checkout') }}" class="checkout-button">Оплатить</a>
+            <a href="{{ url_for('clear_cart') }}" class="clear-cart-button">Очистить корзину</a>
+            <a href="{{ url_for('products') }}" class="continue-shopping-button">Продолжить покупки</a>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 20px; background: #405d77; margin-top: 30px; border-top: 1px solid #e0e0e0;">
+        <p style="margin: 0; color: #000000; font-style: italic; font-weight: bold;">&copy; 2025 Строй.IT. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

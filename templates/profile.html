@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>Личный кабинет</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #FFFFE0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 900px;
+        width: 100%;
+        margin-top: 50px;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1.1em;
+    }
+
+    h1 {
+        text-align: center;
+        color: #405d77;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+
+
+    .button {
+        display: inline-block;
+        padding: 12px 25px;
+        background-color: #4CAF50;
+        color: #fff;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1.2em;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: background-color 0.3s, transform 0.2s;
+        margin-bottom: 20px;
+    }
+    .button:hover {
+        background-color: #7CFC00;
+        transform: translateY(-2px);
+    }
+
+
+    form {
+        width: 100%;
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: #f0f0f0;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        font-size: 1.1em;
+    }
+
+
+    .form-group {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+
+    label {
+        flex: 1;
+        text-align: right;
+        font-weight: 600;
+        min-width: 150px;
+        font-size: 1.1em;
+    }
+
+
+    .input-container {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1.1em;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        box-sizing: border-box;
+    }
+    input[type="text"]:focus,
+    textarea:focus {
+        border-color: #405d77;
+        box-shadow: 0 0 8px rgba(64, 93, 119, 0.3);
+        outline: none;
+    }
+
+
+    textarea {
+        height: 200px;
+        resize: vertical;
+    }
+
+
+    .avatar-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .avatar-section img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        border: 2px solid #ccc;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .avatar-section img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+
+button[type="submit"] {
+    align-self: center;
+    padding: 14px 30px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+button[type="submit"]:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+
+.admin-badge {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff0300;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.2em;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Личный кабинет</h1>
+    <a href="{{ url_for('home') }}" class="button">На главную</a>
+    <form method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="avatar">Аватар:</label>
+            <div class="input-container avatar-section">
+                {% if user.profile_picture %}
+                    <img src="{{ url_for('static', filename='images/' ~ user.profile_picture) }}" alt="Avatar">
+                {% endif %}
+                <input type="file" name="avatar" id="avatar" placeholder="Загрузить аватар">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="first_name">Имя:</label>
+            <div class="input-container">
+                <input type="text" name="first_name" id="first_name" value="{{ user.first_name }}" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="last_name">Фамилия:</label>
+            <div class="input-container">
+                <input type="text" name="last_name" id="last_name" value="{{ user.last_name }}" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="patronymic">Отчество:</label>
+            <div class="input-container">
+                <input type="text" name="patronymic" id="patronymic" value="{{ user.patronymic }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Адрес:</label>
+            <div class="input-container">
+                <input type="text" name="address" id="address" value="{{ user.address }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phone_number">Номер телефона:</label>
+            <div class="input-container">
+                <input type="text" name="phone_number" id="phone_number" value="{{ user.phone_number }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="about_me">О себе:</label>
+            <div class="input-container">
+                <textarea name="about_me" id="about_me">{{ user.about_me }}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="secret_key">Секретный ключ:</label>
+            <div class="input-container">
+                <input type="text" name="secret_key" id="secret_key" placeholder="Введите секретный ключ">
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit">Сохранить изменения</button>
+        </div>
+    </form>
+
+    {% if user.is_admin %}
+        <div class="admin-badge">Вы администратор!</div>
+    {% endif %}
+</div>
+
+</body>
+</html>
+
+
